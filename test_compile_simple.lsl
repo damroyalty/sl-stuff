@@ -2,6 +2,6 @@ default
 {
     state_entry()
     {
-        llOwnerSay("LSL compile test OK");
+        llOwnerSay("LSL compile test oki");
     }
 }
