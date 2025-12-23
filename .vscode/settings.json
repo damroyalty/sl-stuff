@@ -1,0 +1,8 @@
+{
+  "terminal.integrated.env.windows": {
+    "Path": "${env:Path};C:\\Users\\devmagb650rtx3060\\Desktop\\.-. merp\\lslint_v1.2.7_win64"
+  },
+  // Extension-specific LSLint executable path (some extensions use `lslint.executablePath` or `lslint.path`)
+  "lslint.executablePath": "C:\\Users\\devmagb650rtx3060\\Desktop\\.-. merp\\lslint_v1.2.7_win64\\lslint.exe",
+  "lslint.path": "C:\\Users\\devmagb650rtx3060\\Desktop\\.-. merp\\lslint_v1.2.7_win64\\lslint.exe" 
+}
