@@ -1,7 +1,5 @@
 doFlushedEffect(key toucherID)
-{
-    llTriggerSound("dd65e655-fcf3-8000-471f-930ef9f4a4d8", 0.5);
-    llSleep(0.6); 
+{ 
     if (!heartbeatActive)
     {
         llLoopSound("0077531d-fa99-088b-3c43-dfdf935349ef", 0.9);
@@ -9,7 +7,6 @@ doFlushedEffect(key toucherID)
     }
     else
     {
-        llOwnerSay("heartbeat refreshed");
     }
     heartbeatEnd = llGetTime() + 3.0;
     llSetTimerEvent(0.3);
