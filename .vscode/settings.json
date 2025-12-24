@@ -3,5 +3,6 @@
     "Path": "${env:Path};C:\\Users\\devmagb650rtx3060\\Desktop\\.-. merp\\lslint_v1.2.7_win64"
   },
   "lslint.executablePath": "C:\\Users\\devmagb650rtx3060\\Desktop\\.-. merp\\lslint_v1.2.7_win64\\lslint.exe",
-  "lslint.path": "C:\\Users\\devmagb650rtx3060\\Desktop\\.-. merp\\lslint_v1.2.7_win64\\lslint.exe" 
+  "lslint.path": "C:\\Users\\devmagb650rtx3060\\Desktop\\.-. merp\\lslint_v1.2.7_win64\\lslint.exe",
+  "vscord.status.idle.timeout": 25000
 }
