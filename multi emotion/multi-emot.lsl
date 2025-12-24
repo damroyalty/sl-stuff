@@ -138,7 +138,7 @@ doHeartEyes()
     ]);
 }
 
-doSweatdrop()
+doAwkward()
 {
     if (SOUND_SWEATDROP != "") llPlaySound(SOUND_SWEATDROP, 0.6);
     
@@ -185,20 +185,21 @@ doNervous()
     llParticleSystem([]);
     llParticleSystem([
         PSYS_SRC_PATTERN, PSYS_SRC_PATTERN_EXPLODE,
-        PSYS_SRC_BURST_PART_COUNT, 20,
-        PSYS_SRC_BURST_RATE, 0.15,
-        PSYS_PART_MAX_AGE, 2.0,
-        PSYS_SRC_ACCEL, (vector)<0, 0, 0.05>,
+        PSYS_SRC_BURST_PART_COUNT, 22,
+        PSYS_SRC_BURST_RATE, 0.12,
+        PSYS_PART_MAX_AGE, 2.4,
+        PSYS_SRC_ACCEL, (vector)<0, 0, -0.9>,
         PSYS_SRC_TEXTURE, TEX_NERVOUS,
-        PSYS_SRC_BURST_SPEED_MIN, (float)0.08,
-        PSYS_SRC_BURST_SPEED_MAX, (float)0.12,
+        PSYS_SRC_BURST_SPEED_MIN, (float)0.25,
+        PSYS_SRC_BURST_SPEED_MAX, (float)0.6,
+        PSYS_SRC_BURST_RADIUS, (float)0.18,
         PSYS_PART_START_SCALE, (vector)<0.10, 0.10, 0>,
         PSYS_PART_END_SCALE, (vector)<0.06, 0.06, 0>,
-        PSYS_PART_START_COLOR, (vector)<0.5, 0.5, 0.7>, 
+        PSYS_PART_START_COLOR, (vector)<0.5, 0.5, 0.7>,
         PSYS_PART_END_COLOR, (vector)<0.6, 0.6, 0.8>,
-        PSYS_PART_START_ALPHA, 0.8,
+        PSYS_PART_START_ALPHA, 0.9,
         PSYS_PART_END_ALPHA, 0.0,
-        PSYS_SRC_MAX_AGE, (float)1.2,
+        PSYS_SRC_MAX_AGE, (float)1.4,
         PSYS_PART_FLAGS,
             PSYS_PART_EMISSIVE_MASK |
             PSYS_PART_INTERP_COLOR_MASK |
@@ -311,7 +312,7 @@ default
                 }
                 else if (emotion == "SWEATDROP")
                 {
-                    doSweatdrop();
+                    doAwkward();
                 }
                 else if (emotion == "NERVOUS")
                 {
