@@ -1,10 +1,10 @@
 string DISPLAY_NAME = "";  // will be set to the owner's name at runtime
 
 string SOUND_FLUSHED = "0077531d-fa99-088b-3c43-dfdf935349ef"; // heartbeat
-string SOUND_MINDBLOWN = "";    // explosion sound
-string SOUND_HEARTEYES = "";    // romantic sound
-string SOUND_SWEATDROP = "";    // drop sound
-string SOUND_NERVOUS = "";      // shaking/anxious sound
+string SOUND_MINDBLOWN = "421e0587-4bf3-d156-0f0c-42fcd68801f1";    // explosion sound
+string SOUND_HEARTEYES = "0077531d-fa99-088b-3c43-dfdf935349ef";    // romantic sound
+string SOUND_SWEATDROP = "dd65e655-fcf3-8000-471f-930ef9f4a4d8";    // drop sound
+string SOUND_NERVOUS = "0077531d-fa99-088b-3c43-dfdf935349ef";      // shaking/anxious sound
 string SOUND_STARRY = "dd65e655-fcf3-8000-471f-930ef9f4a4d8"; // chime
 
 string TEX_FLUSHED = "blush-emoji";
@@ -15,6 +15,7 @@ string TEX_NERVOUS = "nervous-emoji";
 string TEX_STARRY = "star-emoji";
 
 integer heartbeat_active = FALSE;
+integer mindblown_active = FALSE;
 
 doFlushed(key toucherID)
 {
@@ -66,7 +67,12 @@ doFlushed(key toucherID)
 
 doMindBlown()
 {
-    if (SOUND_MINDBLOWN != "") llPlaySound(SOUND_MINDBLOWN, 0.8);
+    if (SOUND_MINDBLOWN != "")
+    {
+        llPlaySound(SOUND_MINDBLOWN, 0.8);
+        mindblown_active = TRUE;
+        llSetTimerEvent(2.5);
+    }
     
     string origName = llGetObjectName();
     llSetObjectName(DISPLAY_NAME);
@@ -271,10 +277,11 @@ default
 
     timer()
     {
-        if (heartbeat_active)
+        if (heartbeat_active || mindblown_active)
         {
             llStopSound();
             heartbeat_active = FALSE;
+            mindblown_active = FALSE;
             llSetTimerEvent(0.0);
         }
     }
