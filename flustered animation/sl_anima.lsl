@@ -33,19 +33,21 @@ doFlushedEffect(key toucherID)
     
     llSetObjectName(origName);
     
-    llParticleSystem([]);  
+    llParticleSystem([]);
     llParticleSystem([
         PSYS_SRC_PATTERN, PSYS_SRC_PATTERN_EXPLODE,
-        PSYS_SRC_BURST_PART_COUNT, 25,
-        PSYS_SRC_BURST_RATE, 0.3,
-        PSYS_PART_MAX_AGE, 4.0,
+        PSYS_SRC_BURST_PART_COUNT, 15,
+        PSYS_SRC_BURST_RATE, 0.2,
+        PSYS_PART_MAX_AGE, 3.0,
         PSYS_SRC_ACCEL, (vector)<0, 0, 0.15>,
-        PSYS_SRC_TEXTURE, "blush-emoji",
-        
+        PSYS_SRC_TEXTURE, "",
+
         PSYS_SRC_BURST_SPEED_MIN, (float)0.05,
         PSYS_SRC_BURST_SPEED_MAX, (float)0.15,
         PSYS_PART_START_SCALE, (vector)<0.12, 0.12, 0>,
         PSYS_PART_END_SCALE, (vector)<0.05, 0.05, 0>,
+        PSYS_PART_START_COLOR, (vector)<1.0, 0.6, 0.75>,
+        PSYS_PART_END_COLOR, (vector)<1.0, 0.8, 0.9>,
         PSYS_PART_START_ALPHA, 0.9,
         PSYS_PART_END_ALPHA, 0.0,
         PSYS_SRC_MAX_AGE, (float)1.0,
