@@ -76,7 +76,7 @@ doMindBlown()
     
     string origName = llGetObjectName();
     llSetObjectName(DISPLAY_NAME);
-    llSay(0, "/me's mind is BLOWN 🤯✨");
+    llSay(0, "/me's mind is blown 🤯✨");
     llSetObjectName(origName);
     
     llParticleSystem([]);
@@ -111,7 +111,7 @@ doHeartEyes()
     
     string origName = llGetObjectName();
     llSetObjectName(DISPLAY_NAME);
-    llSay(0, "/me has HEART EYES 😍💕");
+    llSay(0, "/me is in awe 😍💕");
     llSetObjectName(origName);
     
     llParticleSystem([]);
@@ -183,7 +183,7 @@ doNervous()
     
     string origName = llGetObjectName();
     llSetObjectName(DISPLAY_NAME);
-    llSay(0, "/me is having MAJOR anxiety 😰💦");
+    llSay(0, "/me is having major anxiety😰💦");
     llSetObjectName(origName);
     
     llParticleSystem([]);
@@ -218,7 +218,7 @@ doStarry()
     
     string origName = llGetObjectName();
     llSetObjectName(DISPLAY_NAME);
-    llSay(0, "/me is STARSTRUCK ✨⭐");
+    llSay(0, "/me is starstruck ✨⭐");
     llSetObjectName(origName);
     
     llParticleSystem([]);
