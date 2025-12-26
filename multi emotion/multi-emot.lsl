@@ -32,11 +32,11 @@ doFlushed(key toucherID)
     llSetObjectName(ownerName);
     if (toucherID == llGetOwner())
     {
-        llSay(0, "/me is totally flustered 😳 💕");
+        llSay(0, "/me is totally flustered😳 💕");
     }
     else
     {
-        llSay(0, "/me is totally flustered by " + toucherName + " 😳 💕");
+        llSay(0, "/me is totally flustered by " + toucherName + "😳 💕");
     }
     llSetObjectName(origName);
     
@@ -76,7 +76,7 @@ doMindBlown()
     
     string origName = llGetObjectName();
     llSetObjectName(DISPLAY_NAME);
-    llSay(0, "/me's mind is blown 🤯✨");
+    llSay(0, "/me's mind is blown🤯✨");
     llSetObjectName(origName);
     
     llParticleSystem([]);
@@ -111,7 +111,7 @@ doHeartEyes()
     
     string origName = llGetObjectName();
     llSetObjectName(DISPLAY_NAME);
-    llSay(0, "/me is in awe 😍💕");
+    llSay(0, "/me is in awe😍💕");
     llSetObjectName(origName);
     
     llParticleSystem([]);
@@ -218,7 +218,7 @@ doStarry()
     
     string origName = llGetObjectName();
     llSetObjectName(DISPLAY_NAME);
-    llSay(0, "/me is starstruck ✨⭐");
+    llSay(0, "/me is starstruck✨⭐");
     llSetObjectName(origName);
     
     llParticleSystem([]);
