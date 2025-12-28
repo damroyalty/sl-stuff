@@ -1,10 +1,10 @@
 string DISPLAY_NAME = "";  // will be set to the owner's name at runtime
 
 string SOUND_FLUSHED = "0077531d-fa99-088b-3c43-dfdf935349ef"; // heartbeat
-string SOUND_MINDBLOWN = "421e0587-4bf3-d156-0f0c-42fcd68801f1";    // explosion sound
-string SOUND_HEARTEYES = "0077531d-fa99-088b-3c43-dfdf935349ef";    // romantic sound
-string SOUND_SWEATDROP = "dd65e655-fcf3-8000-471f-930ef9f4a4d8";    // drop sound
-string SOUND_NERVOUS = "0077531d-fa99-088b-3c43-dfdf935349ef";      // shaking/anxious sound
+string SOUND_MINDBLOWN = "dd65e655-fcf3-8000-471f-930ef9f4a4d8";    // chime
+string SOUND_HEARTEYES = "0077531d-fa99-088b-3c43-dfdf935349ef";    // heartbeat
+string SOUND_SWEATDROP = "dd65e655-fcf3-8000-471f-930ef9f4a4d8";    // chime
+string SOUND_NERVOUS = "0077531d-fa99-088b-3c43-dfdf935349ef";      // chime
 string SOUND_STARRY = "dd65e655-fcf3-8000-471f-930ef9f4a4d8"; // chime
 
 string TEX_FLUSHED = "blush-emoji";
