@@ -14,7 +14,7 @@ startRain(integer mode)
     {
         llParticleSystem([]);
         llStopSound();
-        llOwnerSay("☀️ Rain stopped!");
+        llOwnerSay("☀️ rain stopped!");
         return;
     }
     
@@ -90,8 +90,8 @@ default
     {
         if (SOUND_RAIN != "") llPreloadSound(SOUND_RAIN);
         llListen(999, "", NULL_KEY, "");
-        llOwnerSay("☁️ Rain Cloud Ready!");
-        llOwnerSay("Touch to cycle: Off → Light → Heavy → Storm");
+        llOwnerSay("☁️ rain cloud ready!");
+        llOwnerSay("touch to cycle: off → light → heavy → storm");
     }
     
     on_rez(integer start_param)
