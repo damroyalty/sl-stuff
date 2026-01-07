@@ -1,4 +1,6 @@
 {
+  "java.enabled": false,
+
   "terminal.integrated.env.windows": {
     "Path": "${env:Path};C:\\Users\\devmagb650rtx3060\\Desktop\\.-. merp\\lslint_v1.2.7_win64"
   },
@@ -33,5 +35,5 @@
   ],
   "luau-lsp.platform.type": "standard",
   "luau-lsp.sourcemap.enabled": false,
-  "selene.warnRoblox": false
+  "luau-lsp.sourcemap.includeNonScripts": true
 }
