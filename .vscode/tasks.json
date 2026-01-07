@@ -16,6 +16,26 @@
         "panel": "dedicated"
       },
       "group": "build"
+    },
+    {
+      "label": "Run LSLint (current file)",
+      "type": "shell",
+      "command": "C:\\Users\\devmagb650rtx3060\\Desktop\\.-. merp\\lslint_v1.2.7_win64\\lslint.exe",
+      "args": ["${file}"],
+      "presentation": {
+        "reveal": "always"
+      },
+      "group": "build"
+    },
+    {
+      "label": "Update SL Lua Types",
+      "type": "shell",
+      "command": "pwsh",
+      "args": ["-NoProfile", "-File", "${workspaceFolder}\\.vscode\\scripts\\update_sl_lua_types.ps1"],
+      "presentation": {
+        "reveal": "always"
+      },
+      "group": "none"
     }
   ]
-}
+}         

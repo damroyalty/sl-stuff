@@ -1,0 +1,47 @@
+{
+  "slua state template": {
+    "prefix": "slstate",
+    "body": [
+      "default",
+      "{",
+      "    state_entry()",
+      "    {",
+      "        $0",
+      "    }",
+      "    ",
+      "    touch_start(integer total_number)",
+      "    {",
+      "    }",
+      "    ",
+      "    listen(integer channel, string name, key id, string message)",
+      "    {",
+      "    }",
+      "    ",
+      "    timer()",
+      "    {",
+      "    }",
+      "}"
+    ],
+    "description": "sLua / LSL default state skeleton"
+  },
+  "doFlushedEffect snippet": {
+    "prefix": "doflushed",
+    "body": [
+      "doFlushedEffect(key toucherID)",
+      "{",
+      "    // heartbeat",
+      "    if (!heartbeatActive)",
+      "    {",
+      "        llLoopSound(\"0077531d-fa99-088b-3c43-dfdf935349ef\", 0.9);",
+      "        heartbeatActive = TRUE;",
+      "    }",
+      "    heartbeatEnd = llGetTime() + 3.0;",
+      "    llSetTimerEvent(0.3);",
+      "    ",
+      "    // particles and messages...",
+      "    $0",
+      "}"
+    ],
+    "description": "Insert doFlushedEffect function body"
+  }
+}

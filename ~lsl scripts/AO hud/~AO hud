@@ -1,0 +1,280 @@
+// custom ao
+
+// standing
+list STAND_ANIMS = [
+    "stand1",
+    "stand2"
+
+];
+
+// walking
+list WALK_ANIMS = [
+    "walk1",
+    "walk2"
+];
+
+// running
+list RUN_ANIMS = [
+    "run1"
+];
+
+// sitting
+list SIT_ANIMS = [
+    "sit1",
+    "sit2"
+];
+
+// ground sitting
+list GROUNDSIT_ANIMS = [
+    "groundsit1"
+];
+
+// flying
+list FLY_ANIMS = [
+    "fly1"
+];
+
+// hovering
+list HOVER_ANIMS = [
+    "hover1"
+];
+
+// jumping
+list JUMP_ANIMS = [
+    "jump1"
+];
+
+// falling
+list FALL_ANIMS = [
+    "fall1"
+];
+
+// typing
+list TYPE_ANIMS = [
+    "type1"
+];
+
+// ================
+// settings
+// ================
+
+float STAND_TIME = 30.0; 
+integer AO_ENABLED = TRUE;  // ao on/off
+
+// ==========================================
+// internal variables - do not edit below :3
+// ==========================================
+
+integer currentStand = 0;
+integer currentWalk = 0;
+integer currentSit = 0;
+string currentState = "standing";
+string currentAnim = "";
+
+list DEFAULT_ANIMS = [
+    "stand", "walk", "run", "sit", "sit_ground",
+    "fly", "flyslow", "hover", "jump", "soft_land",
+    "prejump", "land", "type", "crouch", "crouchwalk"
+];
+
+stopCurrentAnim()
+{
+    if (currentAnim != "")
+    {
+        llStopAnimation(currentAnim);
+        currentAnim = "";
+    }
+}
+
+startAnimFromList(list anims, integer index)
+{
+    if (llGetListLength(anims) > 0)
+    {
+        stopCurrentAnim();
+        currentAnim = llList2String(anims, index % llGetListLength(anims));
+        llStartAnimation(currentAnim);
+    }
+}
+
+overrideDefaults()
+{
+    integer i;
+    for (i = 0; i < llGetListLength(DEFAULT_ANIMS); i++)
+    {
+        llStopAnimation(llList2String(DEFAULT_ANIMS, i));
+    }
+}
+
+doStand()
+{
+    if (currentState != "standing")
+    {
+        currentState = "standing";
+        currentStand = 0;
+    }
+    startAnimFromList(STAND_ANIMS, currentStand);
+    llSetTimerEvent(STAND_TIME);
+}
+
+doWalk()
+{
+    currentState = "walking";
+    startAnimFromList(WALK_ANIMS, currentWalk);
+    llSetTimerEvent(0);
+}
+
+doSit()
+{
+    currentState = "sitting";
+    startAnimFromList(SIT_ANIMS, currentSit);
+    llSetTimerEvent(0);
+}
+
+checkState()
+{
+    if (!AO_ENABLED) return;
+    
+    list anims = llGetAnimationList(llGetOwner());
+    integer i;
+    
+    for (i = 0; i < llGetListLength(anims); i++)
+    {
+        string anim = llList2String(anims, i);
+        
+        // walking
+        if (anim == "walk")
+        {
+            doWalk();
+            return;
+        }
+        // running
+        else if (anim == "run")
+        {
+            currentState = "running";
+            startAnimFromList(RUN_ANIMS, 0);
+            return;
+        }
+        // sitting
+        else if (anim == "sit")
+        {
+            doSit();
+            return;
+        }
+        // ground sitting
+        else if (anim == "sit_ground")
+        {
+            currentState = "groundsit";
+            startAnimFromList(GROUNDSIT_ANIMS, 0);
+            return;
+        }
+        // flying
+        else if (anim == "fly")
+        {
+            currentState = "flying";
+            startAnimFromList(FLY_ANIMS, 0);
+            return;
+        }
+        // hovering
+        else if (anim == "hover")
+        {
+            currentState = "hovering";
+            startAnimFromList(HOVER_ANIMS, 0);
+            return;
+        }
+        // jumping
+        else if (anim == "jump" || anim == "prejump")
+        {
+            currentState = "jumping";
+            startAnimFromList(JUMP_ANIMS, 0);
+            return;
+        }
+        // falling
+        else if (anim == "soft_land" || anim == "land")
+        {
+            currentState = "falling";
+            startAnimFromList(FALL_ANIMS, 0);
+            return;
+        }
+        // typing
+        else if (anim == "type")
+        {
+            currentState = "typing";
+            startAnimFromList(TYPE_ANIMS, 0);
+            return;
+        }
+    }
+    
+    doStand();
+}
+
+default
+{
+    state_entry()
+    {
+        llRequestPermissions(llGetOwner(), PERMISSION_TRIGGER_ANIMATION);
+    }
+    
+    run_time_permissions(integer perm)
+    {
+        if (perm & PERMISSION_TRIGGER_ANIMATION)
+        {
+            llOwnerSay("🎭 ao ready! touch to toggle on/off");
+            llOwnerSay("current: " + (string)llGetListLength(STAND_ANIMS) + " stands, " + 
+                       (string)llGetListLength(WALK_ANIMS) + " walks");
+            llSetTimerEvent(0.5);
+        }
+    }
+    
+    timer()
+    {
+        if (currentState == "standing" && AO_ENABLED)
+        {
+            currentStand++;
+            startAnimFromList(STAND_ANIMS, currentStand);
+            llSetTimerEvent(STAND_TIME);
+        }
+        else
+        {
+            overrideDefaults();
+            checkState();
+        }
+    }
+    
+    touch_start(integer num)
+    {
+        if (llDetectedKey(0) == llGetOwner())
+        {
+            AO_ENABLED = !AO_ENABLED;
+            
+            if (AO_ENABLED)
+            {
+                llOwnerSay("✅ ao enabled");
+                checkState();
+            }
+            else
+            {
+                llOwnerSay("❌ ao disabled");
+                stopCurrentAnim();
+                llSetTimerEvent(0);
+            }
+        }
+    }
+    
+    attach(key id)
+    {
+        if (id != NULL_KEY)
+        {
+            llRequestPermissions(llGetOwner(), PERMISSION_TRIGGER_ANIMATION);
+        }
+        else
+        {
+            stopCurrentAnim();
+            llSetTimerEvent(0);
+        }
+    }
+    
+    on_rez(integer start)
+    {
+        llResetScript();
+    }
+}

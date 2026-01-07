@@ -1,0 +1,16 @@
+{
+  "recommendations": [
+    "vrtlabs.vscode-lsl",
+    "fixedbit.lslint",
+    "jyaoma.lsl-lsp",
+    "dalghost.lsl-fp",
+    "minuitferina.lsl-tools",
+    "wlf-io.sl-external-editor",
+    "skunktel.lsl-fs",
+    "JohnnyMorganz.luau-lsp",
+    "Kampfkarren.selene-vscode"
+  ],
+  "unwantedRecommendations": [
+    "sumneko.lua"
+  ]
+}
