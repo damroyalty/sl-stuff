@@ -13,16 +13,16 @@ showParticles(integer amount)
     integer burstCount = 5;
     float burstRadius = 0.5;
     vector color = <1, 0.8, 0.2>;
-    
+
     if (amount >= 200)
     {
         burstCount = 20;
         burstRadius = 1.5;
         color = <1, 0.2, 0.8>;
     }
-    
+
     llParticleSystem([
-        PSYS_PART_FLAGS, 
+        PSYS_PART_FLAGS,
             PSYS_PART_EMISSIVE_MASK |
             PSYS_PART_INTERP_COLOR_MASK |
             PSYS_PART_INTERP_SCALE_MASK,
@@ -38,8 +38,8 @@ showParticles(integer amount)
         PSYS_SRC_BURST_RADIUS, burstRadius,
         PSYS_SRC_BURST_RATE, 0.1,
         PSYS_SRC_MAX_AGE, 0.5
-    ]);
-    
+        ]);
+
     llSetTimerEvent(2.5);
 }
 
@@ -47,25 +47,24 @@ updateLeaderboard(string name, integer amount)
 {
     integer i;
     integer found = FALSE;
-    
+
     for (i = 0; i < llGetListLength(topTippers); i += 2)
     {
         if (llList2String(topTippers, i) == name)
         {
             integer oldAmount = llList2Integer(topTippers, i + 1);
-            topTippers = llListReplaceList(topTippers, [oldAmount + amount], i + 1, i + 1);
+            topTippers = llListReplaceList(topTippers, [oldAmount + amount], i + 1, i +1);
             found = TRUE;
-            jump end_search;
+            break;
         }
     }
-    @end_search;
-    
+
     if (!found)
     {
         topTippers += [name, amount];
         uniqueTippers++;
     }
-    
+
     integer n = llGetListLength(topTippers) / 2;
     integer swapped;
     do
@@ -82,7 +81,7 @@ updateLeaderboard(string name, integer amount)
             }
         }
     } while (swapped);
-    
+
     if (llGetListLength(topTippers) > 20)
     {
         topTippers = llList2List(topTippers, 0, 19);
@@ -92,30 +91,30 @@ updateLeaderboard(string name, integer amount)
 updateDisplay()
 {
     string displayText = "Dev's Tip Jar :3\nL$" + (string)totalTipped + " tipped";
-    
+
     if (goalEnabled && goalAmount > 0)
     {
         float progress = ((float)totalTipped / (float)goalAmount) * 100.0;
         if (progress > 100.0) progress = 100.0;
         displayText += "\nGoal: " + (string)((integer)progress) + "% of L$" + (string)goalAmount;
     }
-    
+
     displayText += "\n\nTop Tippers:";
     integer i;
     integer showCount = llGetListLength(topTippers) / 2;
     if (showCount > 5) showCount = 5;
-    
+
     for (i = 0; i < showCount * 2; i += 2)
     {
         string tipperName = llList2String(topTippers, i);
         integer tipperAmount = llList2Integer(topTippers, i + 1);
         displayText += "\n" + (string)((i/2) + 1) + ". " + tipperName + " - L$" + (string)tipperAmount;
     }
-    
+
     vector textColor = <1, 1, 1>;
     if (goalEnabled && totalTipped >= goalAmount)
         textColor = <0, 1, 0>;
-    
+
     llSetText(displayText, textColor, 1.0);
 }
 
@@ -127,14 +126,14 @@ sendStatsToOwner()
     stats += "Unique Tippers: " + (string)uniqueTippers + "\n";
     stats += "Average Tip: L$" + (string)((integer)averageTip) + "\n\n";
     stats += "LEADERBOARD:\n";
-    
+
     integer i;
     for (i = 0; i < llGetListLength(topTippers) && i < 20; i += 2)
     {
         stats += (string)((i/2) + 1) + ". " + llList2String(topTippers, i);
         stats += " - L$" + (string)llList2Integer(topTippers, i + 1) + "\n";
     }
-    
+
     llOwnerSay(stats);
 }
 
@@ -145,19 +144,19 @@ default
         LISTEN_CHANNEL = -1 - (integer)llFrand(999999);
         listenHandle = llListen(LISTEN_CHANNEL, "", "", "");
         llRequestPermissions(llGetOwner(), PERMISSION_DEBIT);
-        
+
         string desc = llGetObjectDesc();
         if (desc != "")
         {
             list data = llParseString2List(desc, ["|"], []);
             if (llGetListLength(data) >= 1)
                 totalTipped = llList2Integer(data, 0);
-        }
-        
+        }   
+
         updateDisplay();
         llSay(0, "tip jar ready! touch to contribute :3");
     }
-    
+
     run_time_permissions(integer perm)
     {
         if (perm & PERMISSION_DEBIT)
@@ -165,25 +164,25 @@ default
             llOwnerSay("tip jar permissions granted. ready to accept tips! :3");
         }
     }
-    
+
     touch_start(integer num_detected)
     {
         key toucher = llDetectedKey(0);
-        
+
         if (toucher == llGetOwner())
         {
             sendStatsToOwner();
             llDialog(toucher, "Owner Menu:", ["Stats", "Reset", "Set Goal", "Toggle Goal", "Test Tip"], LISTEN_CHANNEL);
             return;
         }
-        
+
         llDialog(toucher, "How would you like to tip?", ["Quick L$10", "Quick L$50", "Quick L$100", "Custom"], LISTEN_CHANNEL);
     }
-    
+
     listen(integer channel, string name, key id, string message)
     {
         if (channel != LISTEN_CHANNEL) return;
-        
+
         if (id == llGetOwner())
         {
             if (message == "Stats")
@@ -199,11 +198,11 @@ default
                 topTippers = [];
                 llSetObjectDesc("");
                 updateDisplay();
-                llOwnerSay("Tip jar statistics reset.");
+                llOwnerSay("Tip jar statistics reset");
             }
             else if (message == "Set Goal")
             {
-                llTextBox(id, "Enter new goal amount (L$):", LISTEN_CHANNEL);
+                llTextBox(id, "Enter new goal amount in (L$):", LISTEN_CHANNEL);
             }
             else if (message == "Toggle Goal")
             {
@@ -211,7 +210,7 @@ default
                 updateDisplay();
                 if (goalEnabled)
                 {
-                    llOwnerSay("Goal display enabled");
+                llOwnerSay("Goal display enabled");
                 }
                 else
                 {
@@ -231,9 +230,9 @@ default
             }
             return;
         }
-        
+
         integer tipAmount = 0;
-        
+
         if (message == "Quick L$10")
             tipAmount = 10;
         else if (message == "Quick L$50")
@@ -249,60 +248,60 @@ default
         {
             tipAmount = (integer)message;
         }
-        
+
         if (tipAmount <= 0)
         {
             llRegionSayTo(id, 0, "invalid tip amount .-. please try again");
             return;
         }
-        
+
         llGiveMoney(llGetOwner(), tipAmount);
         totalTipped += tipAmount;
         tipCount++;
         averageTip = (float)totalTipped / (float)tipCount;
-        
+
         string tipperName = llKey2Name(id);
         updateLeaderboard(tipperName, tipAmount);
         llSetObjectDesc((string)totalTipped);
         showParticles(tipAmount);
         updateDisplay();
-        
-        llRegionSayTo(id, 0, "thank you for your generous tip of L$ !!! ><" + (string)tipAmount + "!");
-        
+
+        llRegionSayTo(id, 0, "thank you for your generous tip of L$" + (string)tipAmount + "!!!! ><");
+
         if (tipAmount >= 100)
         {
-            llSay(0, tipperName + " just tipped L$ !!! ><" + (string)tipAmount + "! thank you!!! :3");
+            llSay(0, tipperName + " just tipped L$" + (string)tipAmount + "!!! thank you !!! :3");
         }
-        
+
         if (goalEnabled && totalTipped >= goalAmount)
         {
-            llSay(0, "GOAL REACHED! Thank you everyone!");
+            llSay(0, "GOAL REACHED!! THANK YOU EVERYONE!!");
         }
     }
-    
+
     timer()
     {
         llParticleSystem([]);
         llSetTimerEvent(0.0);
     }
-    
+
     money(key giver, integer amount)
     {
         totalTipped += amount;
         tipCount++;
         averageTip = (float)totalTipped / (float)tipCount;
-        
+
         string tipperName = llKey2Name(giver);
         updateLeaderboard(tipperName, amount);
         llSetObjectDesc((string)totalTipped);
         showParticles(amount);
         updateDisplay();
-        
-        llRegionSayTo(giver, 0, "thank you for your tip of L$ !!! ><" + (string)amount + "!");
-        
+
+        llRegionSayTo(giver, 0, "thank you for your tip of L$ " + (string)amount + "!!!! ><");
+
         if (amount >= 100)
         {
-            llSay(0, tipperName + " just tipped L$ !!! ><" + (string)amount + "! thank you!! :3");
+            llSay(0, tipperName + " just tipped L$ " + (string)amount + "! thank you!! :3");
         }
     }
 }
