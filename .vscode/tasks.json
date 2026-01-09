@@ -4,7 +4,7 @@
     {
       "label": "Run LSLint (safe)",
       "type": "shell",
-      "command": "powershell",
+      "command": "pwsh",
       "args": [
         "-NoProfile",
         "-File",
@@ -20,7 +20,7 @@
     {
       "label": "Run LSLint (current file)",
       "type": "shell",
-      "command": "${workspaceFolder}/lslint_v1.2.7_win64/lslint.exe",
+      "command": "C:\\Users\\devmagb650rtx3060\\Desktop\\.-. merp\\lslint_v1.2.7_win64\\lslint.exe",
       "args": ["${file}"],
       "presentation": {
         "reveal": "always"
@@ -30,7 +30,7 @@
     {
       "label": "Update SL Lua Types",
       "type": "shell",
-      "command": "powershell",
+      "command": "pwsh",
       "args": ["-NoProfile", "-File", "${workspaceFolder}\\.vscode\\scripts\\update_sl_lua_types.ps1"],
       "presentation": {
         "reveal": "always"
