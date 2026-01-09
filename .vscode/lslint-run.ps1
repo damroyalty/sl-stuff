@@ -9,6 +9,12 @@ if (-not (Test-Path -LiteralPath $File)) {
     exit 2
 }
 
+# Only run on .lsl files — skip other file types (e.g. .luau definitions)
+if ([System.IO.Path]::GetExtension($File).ToLower() -ne '.lsl') {
+    Write-Host "Skipping non-lsl file: $File"
+    exit 0
+}
+
 $exe = (Get-Command lslint -ErrorAction SilentlyContinue).Source
 if (-not $exe) {
     # Compute script root reliably (PSScriptRoot not always set in older PowerShell versions)
