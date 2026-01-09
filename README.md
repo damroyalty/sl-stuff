@@ -1,10 +1,6 @@
-unoraganized scripts for sl until i sort it out
-
-
+# Unorganized scripts for sl until I sort it out
 
 merp
-
-
 
 
 
