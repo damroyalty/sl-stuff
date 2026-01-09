@@ -4,7 +4,7 @@
     {
       "label": "Run LSLint (safe)",
       "type": "shell",
-      "command": "pwsh",
+      "command": "powershell",
       "args": [
         "-NoProfile",
         "-File",
@@ -30,7 +30,7 @@
     {
       "label": "Update SL Lua Types",
       "type": "shell",
-      "command": "pwsh",
+      "command": "powershell",
       "args": ["-NoProfile", "-File", "${workspaceFolder}\\.vscode\\scripts\\update_sl_lua_types.ps1"],
       "presentation": {
         "reveal": "always"
