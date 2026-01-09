@@ -31,4 +31,7 @@
   "luau-lsp.platform.type": "standard",
   "luau-lsp.sourcemap.enabled": false,
   "luau-lsp.sourcemap.includeNonScripts": true,
+  "luau-lsp.plugin.enabled": false,
+  "luau-lsp.diagnostics.enabled": false,
+  "luau-lsp.server.enabled": false,
 }
