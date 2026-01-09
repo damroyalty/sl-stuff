@@ -35,5 +35,6 @@
   ],
   "luau-lsp.platform.type": "standard",
   "luau-lsp.sourcemap.enabled": false,
-  "luau-lsp.sourcemap.includeNonScripts": true
+  "luau-lsp.sourcemap.includeNonScripts": true,
+  "selene.warnRoblox": false
 }
