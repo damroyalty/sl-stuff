@@ -1,0 +1,53 @@
+--!nocheck
+-- @diagnostic disable: undefined-global
+
+local totalTipped = 0
+
+ll.SetText("💰 Tip Jar\nL$0 tipped", vector(1, 1, 1), 1.0)
+ll.Say(0, "tip jar is ready! touch me to tip :3")
+
+ll.RequestPermissions(ll.GetOwner(), PERMISSION_DEBIT)
+
+LLEvents:on("run_time_permissions", function(perm)
+    if bit32.band(perm, PERMISSION_DEBIT) ~= 0 then
+        ll.OwnerSay("✅ tip jar has permission to handle money!")
+    else
+        ll.OwnerSay("❌ error: no money permission granted. tip jar won't work!")
+    end
+end)
+
+LLEvents:on("touch_start", function(num_detected)
+    local toucher = ll.GetDetectedKey(0)
+    ll.Dialog(toucher, "How much would you like to tip?", {"L$10", "L$25", "L$50", "L$100"}, -1)
+end)
+
+ll.Listen(-1, "", "", "")
+LLEvents:on("listen", function(channel, name, id, message)
+    local amountText = string.sub(message, 3)
+    local tipAmount = tonumber(amountText)
+    
+    if not tipAmount or tipAmount <= 0 then
+        ll.RegionSayTo(id, 0, "invalid tip amount!")
+        return
+    end
+    
+    ll.GiveMoney(ll.GetOwner(), tipAmount)
+    totalTipped = totalTipped + tipAmount
+    
+    ll.SetText(`💰Tip Jar\nL${totalTipped} tipped`, vector(0, 1, 0), 1.0)
+    ll.RegionSayTo(id, 0, `thank you for your L${tipAmount} tip !!! >< 🤍`)
+    
+    if tipAmount >= 100 then
+        ll.Say(0, `🎉 {ll.Key2Name(id)} just tipped L${tipAmount}!`)
+    end
+end)
+
+LLEvents:on("money", function(giver, amount)
+    totalTipped = totalTipped + amount
+    ll.SetText(`💰Tip Jar\nL${totalTipped} tipped`, vector(0, 1, 0), 1.0)
+    ll.RegionSayTo(giver, 0, `thank you for your L${amount} tip !!! >< 🤍`)
+    
+    if amount >= 100 then
+        ll.Say(0, `🎉 {ll.Key2Name(giver)} just tipped L${amount}!`)
+    end
+end)

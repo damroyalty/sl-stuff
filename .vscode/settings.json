@@ -29,5 +29,6 @@
     "c:\\Users\\devmagb650rtx3060\\Desktop\\.-. merp_sl stuff\\.vscode\\sl-vscode-plugin\\slua_default.docs.json"
   ],
   "luau-lsp.platform.type": "standard",
-  "selene.warnRoblox": false
+  "selene.warnRoblox": false,
+  "luau-lsp.sourcemap.enabled": false
 }
