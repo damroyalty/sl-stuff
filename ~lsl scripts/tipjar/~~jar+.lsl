@@ -55,8 +55,9 @@ updateLeaderboard(string name, integer amount)
             integer oldAmount = llList2Integer(topTippers, i + 1);
             topTippers = llListReplaceList(topTippers, [oldAmount + amount], i + 1, i +1);
             found = TRUE;
-            break;
+            jump end_search;
         }
+        @end_search;
     }
 
     if (!found)
