@@ -23,12 +23,13 @@
   },
 
   "luau-lsp.types.definitionFiles": {
-    "sl-slua": "c:\\Users\\devmagb650rtx3060\\Desktop\\.-. merp_sl stuff\\.vscode\\sl-vscode-plugin\\slua_default.d.luau"
+    "sl-slua": "${workspaceFolder}\\.vscode\\sl_lua_types\\ll.d.luau"
   },
   "luau-lsp.types.documentationFiles": [
-    "c:\\Users\\devmagb650rtx3060\\Desktop\\.-. merp_sl stuff\\.vscode\\sl-vscode-plugin\\slua_default.docs.json"
+    "${workspaceFolder}\\.vscode\\sl_lua_types\\ll.d.json"
   ],
   "luau-lsp.platform.type": "standard",
   "luau-lsp.sourcemap.enabled": false,
   "luau-lsp.sourcemap.includeNonScripts": true,
+  "selene.warnRoblox": false,
 }

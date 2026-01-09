@@ -1,0 +1,10 @@
+std = "sl_selene_defs"
+
+[rules]
+global_usage = "allow"
+shadowing = "allow"
+must_use = "warn"
+
+[config.empty_if]
+comments_count = true
+
