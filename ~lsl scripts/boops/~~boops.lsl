@@ -1,33 +1,32 @@
-string SOUND_BOOP = "";  // add eventually
-
+string SOUND_BOOP = "";
 string TEX_BOOP = "boop-particle";
 
 doBoop(key booperID)
 {
     if (SOUND_BOOP != "") llPlaySound(SOUND_BOOP, 0.7);
-    
+
     key ownerID = llGetOwner();
-    
+
     string ownerName = llKey2Name(ownerID);
     ownerName = llList2String(llParseString2List(ownerName, [" "], []), 0);
-    
+
     string booperName = llKey2Name(booperID);
     booperName = llList2String(llParseString2List(booperName, [" "], []), 0);
-    
+
     string origName = llGetObjectName();
     llSetObjectName(ownerName);
-    
+
     if (booperID == ownerID)
     {
-        llSay(0, "/me booped themselves! 👉");
+        llSay(0, "/me booped themselves!");
     }
     else
     {
-        llSay(0, "/me got BOOPED by " + booperName + "! 👉✨");
+        llSay(0, "/me got booped by " + booperName + "!✨");
     }
-    
+
     llSetObjectName(origName);
-    
+
     llParticleSystem([]);
     llParticleSystem([
         PSYS_SRC_PATTERN, PSYS_SRC_PATTERN_EXPLODE,
@@ -61,12 +60,12 @@ default
         llListen(999, "", NULL_KEY, "");
         llOwnerSay("boop button ready! touch to boop!");
     }
-    
+
     on_rez(integer start_param)
     {
         llResetScript();
     }
-    
+
     touch_start(integer total_number)
     {
         integer i;
@@ -76,7 +75,7 @@ default
             doBoop(booperID);
         }
     }
-    
+
     listen(integer channel, string name, key id, string message)
     {
         if (message == "BOOP" && llSubStringIndex((string)id, (string)llGetOwner()) != -1)
